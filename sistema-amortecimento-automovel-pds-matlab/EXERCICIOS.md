@@ -4,21 +4,21 @@ Abra o [script MATLAB](suspensao_BE_R2018b_SCRIPT_UNICO.m), execute-o sem modifi
 
 ## Bloco A — compreender o sistema e a discretização
 
-1. **Identificar as parcelas físicas.** Na equação (m\ddot x+c\dot x+kx=F\), indique a unidade e o papel dos quatro termos. Por que não se pode somar (x\), (\dot x\) e (\ddot x\) sem os respectivos coeficientes?
+1. **Identificar as parcelas físicas.** Na equação $m\ddot x+c\dot x+kx=F$, indique a unidade e o papel dos quatro termos. Por que não se pode somar $x$, $\dot x$ e $\ddot x$ sem os respectivos coeficientes?
 
-2. **Fazer a derivada segunda a partir da primeira.** Escreva \(\dot x[n]\) e \(\dot x[n-1]\) por Backward Euler; subtraia ambas e divida por \(T\). Mostre cada etapa até obter \((x[n]-2x[n-1]+x[n-2])/T^2\). Explique por que aparecem **duas** amostras passadas.
+2. **Fazer a derivada segunda a partir da primeira.** Escreva $\dot x[n]$ e $\dot x[n-1]$ por Backward Euler; subtraia ambas e divida por $T$. Mostre cada etapa até obter $\bigl(x[n]-2x[n-1]+x[n-2]\bigr)/T^2$. Explique por que aparecem **duas** amostras passadas.
 
-3. **Isolar a recorrência.** Substitua as duas derivadas discretas no modelo físico, agrupe os coeficientes de \(x[n]\), \(x[n-1]\) e \(x[n-2]\), e isole \(x[n]\). Localize no script as linhas correspondentes a `A`, `B`, `D` e ao laço que calcula `x(n)`.
+3. **Isolar a recorrência.** Substitua as duas derivadas discretas no modelo físico, agrupe os coeficientes de $x[n]$, $x[n-1]$ e $x[n-2]$, e isole $x[n]$. Localize no script as linhas correspondentes a `A`, `B`, `D` e ao laço que calcula `x(n)`.
 
-4. **Indexação e condição inicial.** Explique por que `x(1)` no MATLAB corresponde a \(x[0]\). A partir de \(x[0]=0\), \(\dot x[0]=0\) e \(T=0{,}01\) s, calcule \(x[-1]\). Qual é a primeira posição do vetor `x` calculada pela recorrência? Qual será a primeira amostra **não nula** quando o degrau começar em 0,5 s? Faça uma previsão em milímetros antes de executar.
+4. **Indexação e condição inicial.** Explique por que `x(1)` no MATLAB corresponde a $x[0]$. A partir de $x[0]=0$, $\dot x[0]=0$ e $T=0{,}01$ s, calcule $x[-1]$. Qual é a primeira posição do vetor `x` calculada pela recorrência? Qual será a primeira amostra **não nula** quando o degrau começar em 0,5 s? Faça uma previsão em milímetros antes de executar.
 
-5. **Equilíbrio e resposta transitória.** Calcule \(x_{eq}\) usando a equação contínua em regime permanente. Compare-o com o deslocamento final e o pico exibidos no Command Window. Explique por que o pico pode ultrapassar o equilíbrio sem que o sistema seja instável.
+5. **Equilíbrio e resposta transitória.** Calcule $x_{eq}$ usando a equação contínua em regime permanente. Compare-o com o deslocamento final e o pico exibidos no Command Window. Explique por que o pico pode ultrapassar o equilíbrio sem que o sistema seja instável.
 
 ## Bloco B — experiências com o código
 
 6. **Papel do amortecedor.** Teste `c = 0`, `c = 1500` e `c = 4000` N·s/m, mantendo os demais parâmetros. Compare o pico e o tempo de acomodação. Ao usar `c = 0`, a resposta discreta ainda parece perder amplitude? Separe a dissipação *física* do amortecimento *numérico* introduzido pelo método.
 
-7. **Mola mais rígida ou mais macia.** Teste `k = 7500` e `k = 30000` N/m. Antes de executar, calcule o equilíbrio para ambos. Verifique se o resultado final segue \(F_0/k\) e discuta o que aconteceu com as oscilações.
+7. **Mola mais rígida ou mais macia.** Teste `k = 7500` e `k = 30000` N/m. Antes de executar, calcule o equilíbrio para ambos. Verifique se o resultado final segue $F_0/k$ e discuta o que aconteceu com as oscilações.
 
 8. **Amostragem não é apenas estabilidade.** Rode com `T = 0.01`, `T = 0.05` e `T = 0.10` s; examine a terceira figura. Compare amplitude do primeiro pico, instante aproximado do pico e deslocamento final. Se os três resultados convergem ao mesmo equilíbrio, isso basta para afirmar que os transitórios são igualmente precisos? Justifique.
 
@@ -45,7 +45,7 @@ Abra o [script MATLAB](suspensao_BE_R2018b_SCRIPT_UNICO.m), execute-o sem modifi
 
 ## Pontos de autocorreção
 
-- Com os parâmetros originais e degrau permanente, \(F_0/k = 66{,}67\) mm; o pico fica próximo de 82,31 mm.
-- Com \(T=0{,}01\) s, \(m/T^2+c/T+k=2.665.000\); na primeira amostra excitada, se as anteriores ainda são nulas, \(x\approx F_0/2.665.000=0{,}375\) mm.
-- Reduzir \(k\) à metade duplica o deslocamento final. Mudar apenas \(m\) não altera \(F_0/k\), mas altera o transitório.
+- Com os parâmetros originais e degrau permanente, $F_0/k = 66{,}67$ mm; o pico fica próximo de 82,31 mm.
+- Com $T=0{,}01$ s, $m/T^2+c/T+k=2.665.000$; na primeira amostra excitada, se as anteriores ainda são nulas, $x\approx F_0/2.665.000=0{,}375$ mm.
+- Reduzir $k$ à metade duplica o deslocamento final. Mudar apenas $m$ não altera $F_0/k$, mas altera o transitório.
 - O resultado não descreve a transposição geométrica de uma lombada: a entrada deste programa é uma força equivalente.
